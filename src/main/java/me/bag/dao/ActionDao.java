@@ -29,7 +29,7 @@ public class ActionDao {
 	public static ActionBean getActionData(String target){
 		System.out.println("target--->>>"+target);
 		ActionBean ab = new ActionBean();
-		List<String> abList =ReadFileUtil.readline("bag.txt");
+		List<String> abList =ReadFileUtil.readline("User.txt");
 		for(int i =0;i<abList.size();i++) {
 			ActionBean tempBean = ActionBeantoListUtil.getStrToBean(abList.get(i));
 			if(tempBean.getBagId().equals(target)) {

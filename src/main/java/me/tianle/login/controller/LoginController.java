@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import me.bag.bean.Bag;
-import me.bag.dao.BagDao;
+import me.bag.bean.ActionBean;
+import me.bag.bean.TargetPeople;
+import me.bag.dao.ActionDao;
+import me.bag.dao.UserDao;
 import me.tianle.login.bean.User;
 
 @RestController
@@ -60,33 +62,40 @@ public class LoginController {
 	  user.setPassword("123");
 	  return new ModelAndView("add");
   }
-	@RequestMapping(value = "/addBag", method = RequestMethod.POST)
-	public ModelAndView add(@ModelAttribute Bag bag) {
-		System.out.println("add a bag");
-		  System.out.println(bag.getId());
-		  System.out.println(bag.getName());
-		  System.out.println(bag.getBagBrand());
+	@RequestMapping(value = "/addPeople", method = RequestMethod.POST)
+	public ModelAndView add(@ModelAttribute TargetPeople people) {
+		System.out.println("add a people");
+		  System.out.println(people.getId());
+		  System.out.println(people.getUserName());
+		  System.out.println(people.getBak());
+		  System.out.println(people.getUserName());
+		  System.out.println(people.getHotPot());
+		 
+		 
 			
-			BagDao.saveBagData(bag);
-		  System.out.println("add a bag fnished");
+			UserDao.saveBagData(people);
+		  System.out.println("add a people fnished");
 		  return new ModelAndView("addSuccess");
 	}
-	@RequestMapping(value = "/getbagList", method = RequestMethod.POST)
-	public ModelAndView getbagList(Model model) {
-		System.out.println("getbagList----");
+	@RequestMapping(value = "/getpeopleList", method = RequestMethod.POST)
+	public ModelAndView getpeopleList(Model model) {
+		System.out.println("getpeopleList----");
 		 
-		List<Bag> bagList = BagDao.getBagList();
-		  System.out.println("getbagList fnished:"+bagList.size());
-		  model.addAttribute(bagList);
-		  return new ModelAndView("bagList");
+		List<TargetPeople> userList = UserDao.getUserList();
+		  System.out.println("getpeopleList fnished:"+userList.size());
+		  model.addAttribute("userList",userList);
+		  return new ModelAndView("userList");
 	}
-//  @RequestMapping(value = "/add", method = RequestMethod.POST)
-//  public ModelAndView add(@ModelAttribute User user) {
-//	  System.out.println(user.getName());
-//	  user.setName("dong");
-//	  user.setPassword("123");
-//	  return new ModelAndView("add");
-//  }
+	@RequestMapping(value = "/getMAList", method = RequestMethod.POST)
+	public ModelAndView getMAList(Model model) {
+		System.out.println("getMAList----");
+		 
+		List<TargetPeople> maliciousList = UserDao.getUserList();
+		  System.out.println("getMAList fnished:"+maliciousList.size());
+		  model.addAttribute("maliciousList",maliciousList);
+		  return new ModelAndView("maliciousList");
+	}
+	
   
 
    
