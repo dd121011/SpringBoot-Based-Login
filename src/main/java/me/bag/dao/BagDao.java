@@ -1,6 +1,7 @@
 package me.bag.dao;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.bag.bean.Bag;
@@ -48,6 +49,17 @@ public class BagDao {
 			}
 		}
 		return bag;
+	}
+	public static List<Bag> getBagList(){
+		System.out.println("target--->>>");
+		Bag bag = new Bag();
+		List<String> bagListTemp =ReadFileUtil.readline("bag.txt");
+		List<Bag> bagLsit = new ArrayList<Bag>();
+		for(int i =0;i<bagListTemp.size();i++) {
+			Bag tempBagBean = BeanToList.getStrToBean(bagListTemp.get(i));
+			bagLsit.add(tempBagBean);
+		}
+		return bagLsit;
 	}
 
 }
